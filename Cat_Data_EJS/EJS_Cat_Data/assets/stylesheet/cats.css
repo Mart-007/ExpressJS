@@ -1,0 +1,26 @@
+body{
+    background-color: #1212;
+}
+
+img{
+    margin-left: 28em;
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+    border-radius: 50%;
+    filter: grayscale(100%);
+}
+img:hover{
+    filter: none;
+}
+
+.content{
+    padding: 20px;
+    font-family: arial;
+    background-color: rgba(33, 65, 33, 0.133)
+}
+h2{
+    background-color: #1212;    
+    text-align: center;
+    font-family: arial,sans-ser;
+}

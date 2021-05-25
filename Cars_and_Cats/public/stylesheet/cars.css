@@ -1,0 +1,16 @@
+body{
+    background-color: #1212;
+}
+
+.content{
+    padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(28, 56, 28, 0.133);
+}
+
+img{
+    margin-left: 2rem;
+    padding: 2rem;
+    width: 500px;
+    height: 400px;
+}

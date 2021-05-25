@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Info</title>
+    <link rel="stylesheet" href="/stylesheet/cat.css">
+</head>
+<body>
+    <div class="content">
+        <h1>Details page for <span><%= cat.name%></span> Cat</h1>
+        <img class="cat" src=<%= cat.path %> alt=<%= cat.name %> Cat Photo>
+        <h3>Favorite food: <span><%= cat.favorite_food%></span></h3>
+        <h3>Age: <span><%= cat.age%></span></h3>
+        <h3>Sleeping spots: <span><%= cat.sleeping_spots%></span></h3>
+    </div>
+</body>
+</html>
