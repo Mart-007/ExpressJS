@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAPI</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            let search;
+            $('#people').click( () => {
+                search = '/people/0';
+                $('#placeholder').empty();
+
+                $.ajax({
+                    url: search,
+                    dataType: 'json',
+                    success: (data) => {
+                        let people = data.results;
+                        for(person of people){
+                            $('#placeholder').append(`<li>${person.name}</li>`)
+                        }
+                        console.log('success data is:', data);
+                        diplay(data);
+                    }
+                });
+                return false;
+            });
+            $('#planet').click( () => {
+                search = '/planet/0';
+                $('#placeholder').empty();
+
+                $.ajax({
+                    url: search,
+                    dataType: 'json',
+                    success: (data) => {
+                        let planets = data.results;
+                        for(planet of planets){
+                            $('#placeholder').append(`<li>${planet.name}</li>`);
+                        }
+                        display(data);
+                    }
+                });
+                return false;
+            });
+            $('#next').click( () => {
+                console.log('clicking next.. .');
+                $.get('/next', (data) => {
+                    display(data);
+                }, 'json');
+            });
+            $('#prev').click( () => {
+                console.log('clicking pre.. .');
+                $.get('/prev', (data) => {
+                    display(data);
+                }, 'json');
+            });
+            
+            function display(info){
+                $('#all').removeAttr('hidden');
+
+                //next
+                if(info.next != null){
+                    $('#next').removeAttr('hidden');
+                } 
+                else{
+                    $('#next').attr('hidden', 'hidden')
+                }
+
+                //previous
+                if(info.previous != null){
+                    $('#prev').removeAttr('hidden');
+                }
+                else{
+                    $('#prev').attr('hidden', 'hidden')
+                }
+
+                let build = ' ';
+                for(let i = 0; i < info.results.lengt; i++){
+                    build += `<li> ${info.results[i]} </li>`;
+                }
+
+                $('#placeholder').html(build)
+                setTimeout( () => {
+                    $('#info').scroll(bttom);
+                }, 500);
+            }
+
+            //all
+            $('#all').click( () => {
+                $('#info').unbind('scroll');
+                $('#loading').removeAttr('hidden')
+            });
+            
+        })
+
+    </script>
+
+</head>
+<body>
+   <div class="content">
+        <h1><%=title%></h1>
+        <div class="btn-top">
+            <button id="people">People</button>
+            <button id="planet">Planet</button>
+        </div>
+        <div id="apiData">
+            <ul id="placeholder"></ul>
+        </div>
+        <div class="btn-bottom">
+            <button id="prev" hidden>Previous 10</button>
+            <button id="all" hidden>Get all</button>
+            <button id="next" hidden>Next 10</button>
+        </div>
+   </div>
+</body>
+</html>
